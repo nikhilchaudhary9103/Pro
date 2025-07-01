@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ninjaIG</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            border-bottom: 1px solid #dbdbdb;
+        }
+        header h1 {
+            color: #262626;
+            font-size: 24px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .search-bar input {
+            padding: 5px 10px;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+        }
+        nav a {
+            margin-left: 15px;
+            text-decoration: none;
+            color: #262626;
+        }
+        .stories {
+            display: flex;
+            padding: 15px 10px;
+            overflow-x: auto;
+            border-bottom: 1px solid #dbdbdb;
+        }
+        .story {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 15px;
+        }
+        .story-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+            border: 2px solid #c62d91;
+        }
+        .feed {
+            padding: 10px;
+        }
+        .post {
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            margin-bottom: 20px;
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+        .post-user {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .post-image {
+            width: 100%;
+        }
+        .post-actions {
+            padding: 10px;
+        }
+        .post-caption {
+            padding: 0 10px 10px;
+        }
+        .post-comments {
+            padding: 0 10px 10px;
+        }
+        .comment-form {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #dbdbdb;
+        }
+        .comment-form input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #dbdbdb;
+            border-radius: 20px;
+        }
+        .status-update {
+            padding: 10px;
+            border-top: 1px solid #dbdbdb;
+        }
+        .status-update textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 5px;
+            border: 1px solid #dbdbdb;
+            border-radius: 5px;
+            resize: none;
+        }
+        .admin-link {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #c62d91;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>ninjaIG</h1>
+            <div class="search-bar">
+                <input type="text" placeholder="Search users...">
+                <button id="searchBtn">Search</button>
+            </div>
+            <nav>
+                <a href="#" id="homeLink">Home</a>
+                <a href="#" id="uploadLink">Upload</a>
+                <a href="#" id="profileLink">Profile</a>
+            </nav>
+        </header>
+
+        <!-- Stories -->
+        <div class="stories">
+            <div class="story your-story">
+                <div class="story-circle">+</div>
+                <p>Your story</p>
+            </div>
+            <div class="story">
+                <div class="story-circle">A</div>
+                <p>ankush_jatav</p>
+            </div>
+            <div class="story">
+                <div class="story-circle">R</div>
+                <p>ritiknarvariya</p>
+            </div>
+        </div>
+
+        <!-- Posts Feed -->
+        <div class="feed" id="feed">
+            <div class="post">
+                <div class="post-header">
+                    <div class="story-circle">A</div>
+                    <div class="post-user">ankush_jatav_06950</div>
+                </div>
+                <img class="post-image" src="https://via.placeholder.com/600x400" alt="Post image">
+                <div class="post-actions">
+                    <button class="like-btn">❤️</button>
+                    <button class="comment-btn">💬</button>
+                    <button class="share-btn">↗️</button>
+                </div>
+                <div class="post-caption">
+                    <strong>ankush_jatav_06950</strong> Free fire lover 😊
+                </div>
+                <div class="post-comments">
+                    <p><strong>user1</strong> Nice post!</p>
+                    <p><strong>user2</strong> Great content 👍</p>
+                </div>
+                <div class="comment-form">
+                    <input type="text" placeholder="Add a comment...">
+                    <button class="post-comment-btn">Post</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Update -->
+        <div class="status-update">
+            <textarea placeholder="What's on your mind?"></textarea>
+            <button id="postStatus">Post Status</button>
+        </div>
+    </div>
+
+    <!-- Hidden admin link -->
+    <a href="admin.html" class="admin-link">🔒</a>
+
+    <script>
+        // Simple demo functionality
+        document.getElementById('postStatus').addEventListener('click', function() {
+            const statusText = document.querySelector('.status-update textarea').value;
+            if (statusText.trim() !== '') {
+                alert('Status posted: ' + statusText);
+                document.querySelector('.status-update textarea').value = '';
+            }
+        });
+
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-bar input').value;
+            if (searchTerm.trim() !== '') {
+                alert('Searching for: ' + searchTerm);
+            }
+        });
+    </script>
+</body>
+  </html>
